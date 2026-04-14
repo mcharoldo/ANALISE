@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Demonstrativo Financeiro Completo — 2021 a 2027 | Millennium</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --panel: #ffffff;
+      --ink: #122033;
+      --muted: #5e6c84;
+      --line: #d8e1ef;
+      --nav: #0f1d33;
+      --nav2: #17345c;
+      --green: #0f766e;
+      --blue: #2563eb;
+      --violet: #7c3aed;
+      --red: #dc2626;
+      --amber: #d97706;
+      --gold: #cfa33a;
+      --shadow: 0 16px 40px rgba(22,34,53,.10);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+    }
+
+    .wrap {
+      max-width: 1480px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .brand-banner {
+      background: linear-gradient(90deg, var(--nav), var(--nav2));
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      padding: 18px 26px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      color: #fff;
+      margin-bottom: 18px;
+    }
+
+    .brand-badge {
+      width: 42px;
+      height: 42px;
+      border-radius: 8px;
+      background: linear-gradient(180deg, #d8ad42, #b98b1d);
+      color: #0f1d33;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      font-size: 28px;
+      flex: 0 0 auto;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.25);
+    }
+
+    .brand-copy { min-width: 0; }
+
+    .brand-copy h2 {
+      margin: 0;
+      color: var(--gold);
+      font-size: 18px;
+      line-height: 1.1;
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 700;
+    }
+
+    .brand-copy p {
+      margin: 3px 0 0;
+      color: #d6dbe5;
+      font-size: 12px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    .brand-banner.compact {
+      padding: 10px 18px;
+      margin-top: 18px;
+      margin-bottom: 0;
+    }
+    .brand-banner.compact .brand-badge { width: 30px; height: 30px; font-size: 20px; }
+    .brand-banner.compact .brand-copy h2 { font-size: 14px; }
+    .brand-banner.compact .brand-copy p { font-size: 10px; letter-spacing: .14em; }
+
+    .topbar {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: 24px 28px;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: 38px;
+      line-height: 1.05;
+    }
+
+    .topbar p.subtitle {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 18px 0 0;
+    }
+
+    .tabs button {
+      border: 1px solid var(--line);
+      background: #f8fbff;
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 11px 16px;
+      cursor: pointer;
+      font-weight: 800;
+      font-size: 13px;
+      transition: .2s ease;
+    }
+
+    .tabs button.active {
+      background: linear-gradient(180deg, rgba(15,29,51,.98), rgba(22,40,68,.96));
+      color: #fff;
+      border-color: rgba(15,29,51,.9);
+    }
+
+    .section { display: none; }
+    .section.active { display: block; }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: 22px;
+    }
+
+    .panel h2 {
+      margin: 0 0 6px;
+      font-size: 28px;
+    }
+
+    .panel > p.lead {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .table-shell {
+      overflow: auto;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #fff;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 1080px;
+      font-size: 13px;
+    }
+
+    th, td {
+      padding: 11px 12px;
+      border-bottom: 1px solid #e8eef6;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    th:first-child, td:first-child {
+      text-align: left;
+      position: sticky;
+      left: 0;
+      background: #fff;
+      z-index: 1;
+    }
+
+    thead th {
+      background: #f3f7fc;
+      color: #34445f;
+      font-weight: 800;
+      position: sticky;
+      top: 0;
+      z-index: 2;
+    }
+
+    .cat-row td {
+      text-align: left !important;
+      color: #fff;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      border-bottom: none;
+      padding: 14px 16px;
+    }
+
+    .op td { background: linear-gradient(90deg, var(--green), #12a88b); }
+    .inv td { background: linear-gradient(90deg, #0e7490, #0ea5c5); }
+    .fin td { background: linear-gradient(90deg, var(--violet), #9b6eff); }
+    .tax td { background: linear-gradient(90deg, var(--amber), #f0a434); }
+    .disc td { background: linear-gradient(90deg, #d14343, #f06868); }
+    .final td { background: linear-gradient(90deg, #122b63, #1f4aa8); }
+    .asset-main td { background: linear-gradient(90deg, #1d4ed8, #3b82f6); }
+    .asset-sub td { background: linear-gradient(90deg, #0f766e, #14b8a6); }
+    .asset-long td { background: linear-gradient(90deg, #0f766e, #22c55e); }
+    .asset-invest td { background: linear-gradient(90deg, #7c3aed, #a78bfa); }
+    .asset-fixed td { background: linear-gradient(90deg, #d97706, #f59e0b); }
+    .pass-main td { background: linear-gradient(90deg, #b91c1c, #ef4444); }
+    .pass-long td { background: linear-gradient(90deg, #7c2d12, #ea580c); }
+    .pl-main td { background: linear-gradient(90deg, #122b63, #2563eb); }
+    .proj-main td { background: linear-gradient(90deg, #6d28d9, #a855f7); }
+    .solv-main td { background: linear-gradient(90deg, #065f46, #10b981); }
+
+    .subtotal th, .subtotal td { font-weight: 800; }
+    .subtotal.op th, .subtotal.op td { background: #f1fbf8; }
+    .subtotal.inv th, .subtotal.inv td { background: #f2fbfe; }
+    .subtotal.fin th, .subtotal.fin td { background: #f7f2fe; }
+    .subtotal.tax th, .subtotal.tax td { background: #fff8ef; }
+    .subtotal.final th, .subtotal.final td { background: #eef4ff; }
+    .subtotal.asset th, .subtotal.asset td { background: #edf4ff; }
+    .subtotal.asset2 th, .subtotal.asset2 td { background: #ecfdf5; }
+    .subtotal.asset3 th, .subtotal.asset3 td { background: #f5f3ff; }
+    .subtotal.pass th, .subtotal.pass td { background: #fff1f2; }
+    .subtotal.pass2 th, .subtotal.pass2 td { background: #fff7ed; }
+    .subtotal.pl th, .subtotal.pl td { background: #eef4ff; }
+
+    .grand-total th, .grand-total td {
+      background: #0f1d33 !important;
+      color: #fff;
+      font-weight: 800;
+    }
+
+    .pos { color: #0f766e; font-weight: 800; }
+    .neg { color: #b91c1c; font-weight: 800; }
+
+    .tag {
+      display: inline-block;
+      padding: 4px 9px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .operacional { background: #e4f8f3; color: #0f7e66; }
+    .investimento { background: #e6f6fa; color: #0b7390; }
+    .financiamento { background: #efe8ff; color: #6e41df; }
+    .tributos { background: #fff2de; color: #be7410; }
+    .descontinuadas { background: #ffe7e7; color: #c53b3b; }
+    .resultado { background: #eef4ff; color: #1d4ed8; }
+    .projecao { background: #f4efff; color: #6d28d9; }
+
+    /* Tooltip para Fórmula-base */
+    .tip {
+      position: relative;
+      display: inline-grid;
+      place-items: center;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #eef4ff;
+      color: #1d4ed8;
+      font-size: 11px;
+      font-weight: 800;
+      font-style: normal;
+      cursor: help;
+      margin-left: 6px;
+      border: 1px solid #c7d9f5;
+    }
+    .tip:hover::after {
+      content: attr(data-tip);
+      position: absolute;
+      left: 24px;
+      top: -4px;
+      background: #0f1d33;
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 600;
+      white-space: normal;
+      width: 270px;
+      line-height: 1.4;
+      z-index: 50;
+      box-shadow: 0 10px 30px rgba(15,29,51,.25);
+    }
+    .tip:hover::before {
+      content: "";
+      position: absolute;
+      left: 18px;
+      top: 4px;
+      border: 6px solid transparent;
+      border-right-color: #0f1d33;
+      z-index: 51;
+    }
+
+    /* Chart containers */
+    .chart-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 18px 0;
+    }
+    .chart-box {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px 16px;
+      box-shadow: 0 6px 18px rgba(15,29,51,.05);
+    }
+    .chart-box h4 {
+      margin: 0 0 10px;
+      font-size: 14px;
+      color: #334155;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+    .chart-canvas {
+      position: relative;
+      height: 280px;
+    }
+    @media (max-width: 1000px) {
+      .chart-grid { grid-template-columns: 1fr; }
+    }
+
+    /* KPI strips */
+    .idx-strip-grid {
+      display:grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap:12px;
+      margin-bottom:14px;
+    }
+    .idx-strip {
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:12px 14px;
+      box-shadow:0 6px 18px rgba(15,29,51,.05);
+      display:grid;
+      gap:8px;
+    }
+    .idx-strip-head {
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .idx-strip-title { display:grid; gap:4px; }
+    .idx-strip-title span {
+      color:#64748b; font-size:10px; font-weight:800;
+      letter-spacing:.12em; text-transform:uppercase;
+    }
+    .idx-strip-title strong { color:#0f172a; font-size:14px; line-height:1.2; }
+    .idx-icon {
+      width:28px; height:28px; border-radius:10px;
+      display:grid; place-items:center;
+      font-size:13px; font-weight:900; flex:0 0 auto;
+    }
+    .idx-i-blue { background:#eef4ff; color:#1d4ed8; }
+    .idx-i-teal { background:#ebfbf8; color:#0f766e; }
+    .idx-i-violet { background:#f4efff; color:#6d28d9; }
+    .idx-i-red { background:#fff1f2; color:#b91c1c; }
+    .idx-strip-value {
+      font-size:30px; font-weight:900; line-height:1; color:#0f172a;
+    }
+    .idx-strip-foot {
+      display:flex; align-items:center; justify-content:space-between;
+      gap:8px; flex-wrap:wrap;
+    }
+    .idx-badge {
+      display:inline-flex; align-items:center; gap:6px;
+      padding:5px 9px; border-radius:999px; font-size:11px; font-weight:800;
+    }
+    .idx-b-blue { background:#eaf2ff; color:#1d4ed8; }
+    .idx-b-teal { background:#e7fbf7; color:#0f766e; }
+    .idx-b-violet { background:#f3ecff; color:#6d28d9; }
+    .idx-b-red { background:#fff0f1; color:#b91c1c; }
+    .idx-strip-note { color:#64748b; font-size:11px; font-weight:700; }
+
+    .sparkline { width:100%; height:34px; }
+
+    .idx-exec-grid {
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+      margin-bottom:12px;
+    }
+    .exec-box {
+      background:#fbfdff;
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:14px 16px;
+      box-shadow:0 6px 18px rgba(15,29,51,.04);
+    }
+    .exec-box h3 { margin:0 0 10px; font-size:15px; }
+    .signal-list { display:grid; gap:9px; }
+    .signal-row {
+      display:grid;
+      grid-template-columns: 1.2fr auto auto;
+      gap:10px; align-items:center; font-size:13px;
+    }
+    .signal-row .label { color:var(--ink); font-weight:700; }
+    .signal-row .value { color:var(--muted); font-weight:700; }
+    .semaforo {
+      display:inline-flex; align-items:center; gap:7px;
+      padding:5px 10px; border-radius:999px;
+      font-size:11px; font-weight:800;
+    }
+    .semaforo::before { content:""; width:8px; height:8px; border-radius:50%; }
+    .sem-up { background:#e8faf4; color:#0f766e; }
+    .sem-up::before { background:#10b981; }
+    .sem-down { background:#fff1f2; color:#b91c1c; }
+    .sem-down::before { background:#ef4444; }
+    .sem-flat { background:#eff6ff; color:#1d4ed8; }
+    .sem-flat::before { background:#3b82f6; }
+    .pp-badge { color:#475569; font-size:11px; font-weight:800; }
+
+    .mini-kpis {
+      display:grid;
+      grid-template-columns: repeat(5, minmax(0,1fr));
+      gap:10px;
+      margin-bottom:16px;
+    }
+    .mini-kpi {
+      border:1px solid var(--line); border-radius:14px;
+      background:#fff; padding:11px 13px;
+    }
+    .mini-kpi span {
+      display:block; color:#64748b; font-size:10px; font-weight:800;
+      text-transform:uppercase; letter-spacing:.08em; margin-bottom:6px;
+    }
+    .mini-kpi strong { display:block; font-size:20px; margin-bottom:4px; }
+    .mini-kpi small { color:#64748b; font-size:12px; }
+
+    /* Solvência - Z-Score zones */
+    .zscore-box {
+      background: linear-gradient(90deg, #fff1f2, #fff7ed, #f1fbf8);
+      border-radius: 16px;
+      padding: 18px;
+      margin: 12px 0 20px;
+      border: 1px solid var(--line);
+    }
+    .zscore-bar {
+      position: relative; height: 42px; border-radius: 8px;
+      background: linear-gradient(90deg, #ef4444 0%, #ef4444 28%, #f59e0b 28%, #f59e0b 65%, #10b981 65%, #10b981 100%);
+      margin-top: 12px;
+    }
+    .zscore-marker {
+      position: absolute; top: -6px;
+      width: 3px; height: 54px;
+      background: #0f1d33; border-radius: 2px;
+    }
+    .zscore-marker::after {
+      content: attr(data-label);
+      position: absolute;
+      top: -22px; left: 50%;
+      transform: translateX(-50%);
+      background: #0f1d33; color: #fff;
+      padding: 2px 8px; border-radius: 6px;
+      font-size: 11px; font-weight: 800;
+      white-space: nowrap;
+    }
+    .zscore-zones {
+      display: flex; justify-content: space-between;
+      margin-top: 10px; font-size: 11px; font-weight: 800; color: #475569;
+    }
+    .zscore-zones span { text-align: center; }
+
+    .projection-alert {
+      background: #fff1f2;
+      border: 1px solid #fca5a5;
+      border-radius: 14px;
+      padding: 12px 16px;
+      margin: 14px 0;
+      color: #991b1b;
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.5;
+    }
+    .projection-alert strong { color: #7f1d1d; }
+
+    .insight-box {
+      background: #eff6ff;
+      border-left: 4px solid #1d4ed8;
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin: 12px 0;
+      font-size: 13px;
+      line-height: 1.55;
+      color: #1e3a8a;
+    }
+    .insight-box strong { color: #0f1d33; }
+
+    .formula-cell {
+      color:#334155;
+      font-family:"Segoe UI", Arial, sans-serif;
+      font-size:12px; line-height:1.35;
+      white-space:normal; min-width:210px;
+    }
+
+    @media (max-width:1100px) {
+      .idx-strip-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .idx-exec-grid { grid-template-columns: 1fr; }
+      .mini-kpis { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .signal-row { grid-template-columns: 1fr; }
+    }
+    @media (max-width:900px) {
+      .wrap { padding: 16px; }
+      h1 { font-size: 30px; }
+      .tabs button { width: 100%; }
+    }
+    @media (max-width:700px) {
+      .idx-strip-grid, .mini-kpis { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="brand-banner">
+      <div class="brand-badge">M</div>
+      <div class="brand-copy">
+        <h2>Millennium Consultoria Tributária</h2>
+        <p>Contabilidade Consultiva · Manaus – AM</p>
+      </div>
+    </div>
+
+    <div class="topbar">
+      <h1>Demonstrativo Financeiro Completo</h1>
+      <p class="subtitle">Ativo · Passivo · DRE (IFRS 18/CPC 51) · Índices · Projeções 2026–2027 · Análise de Solvência</p>
+      <div class="tabs">
+        <button class="tab active" data-tab="ativo">Ativo</button>
+        <button class="tab" data-tab="passivo">Passivo e PL</button>
+        <button class="tab" data-tab="dre">DRE (IFRS 18/CPC 51)</button>
+        <button class="tab" data-tab="indices">Índices e Indicadores</button>
+        <button class="tab" data-tab="projecao">Projeção 2026–2027</button>
+        <button class="tab" data-tab="solvencia">Análise de Solvência</button>
+      </div>
+    </div>
+
+    <!-- ================ ATIVO ================ -->
+    <section class="section active" id="ativo">
+      <div class="panel">
+        <h2>Ativo</h2>
+        <p class="lead">Composição do ativo circulante e não circulante. Valores em milhares de reais.</p>
+
+        <div class="chart-grid">
+          <div class="chart-box">
+            <h4>Evolução do Ativo Total (R$ mil)</h4>
+            <div class="chart-canvas"><canvas id="chartAtivoTotal"></canvas></div>
+          </div>
+          <div class="chart-box">
+            <h4>Composição do Ativo 2025</h4>
+            <div class="chart-canvas"><canvas id="chartAtivoComp"></canvas></div>
+          </div>
+        </div>
+
+        <div class="table-shell">
+          <table>
+            <thead>
+              <tr><th>Linha</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th><th>2025</th></tr>
+            </thead>
+            <tbody>
+              <tr class="cat-row asset-main"><td colspan="6">Ativo circulante</td></tr>
+              <tr><th>Caixa e equivalentes de caixa</th><td>R$ 947.928</td><td>R$ 733.748</td><td>R$ 406.767</td><td>R$ 414.563</td><td>R$ 255.863</td></tr>
+              <tr><th>Títulos e valores mobiliários</th><td>R$ 1.492.808</td><td>R$ 1.784.495</td><td>R$ 2.330.698</td><td>R$ 3.324.615</td><td>R$ 2.593.136</td></tr>
+              <tr><th>Clientes por incorporação de imóveis</th><td>R$ 2.378.157</td><td>R$ 2.487.534</td><td>R$ 2.593.205</td><td>R$ 3.136.528</td><td>R$ 3.743.685</td></tr>
+              <tr><th>Clientes por prestação de serviços e aluguéis / outras vendas</th><td>R$ 2.128</td><td>R$ 154.740</td><td>R$ 257.328</td><td>R$ 345.729</td><td>R$ 459.657</td></tr>
+              <tr><th>Imóveis a comercializar</th><td>R$ 4.319.247</td><td>R$ 4.583.823</td><td>R$ 4.588.462</td><td>R$ 4.923.341</td><td>R$ 5.436.499</td></tr>
+              <tr><th>Tributos a recuperar</th><td>R$ 112.659</td><td>R$ 109.807</td><td>R$ 137.821</td><td>R$ 193.198</td><td>R$ 262.518</td></tr>
+              <tr><th>Despesas antecipadas</th><td>R$ 87.739</td><td>R$ 102.498</td><td>R$ 146.030</td><td>R$ 178.856</td><td>R$ 166.312</td></tr>
+              <tr><th>Instrumentos financeiros e derivativos</th><td>R$ 22.368</td><td>R$ 0</td><td>R$ 0</td><td>R$ 0</td><td>R$ 7.574</td></tr>
+              <tr><th>Outros ativos</th><td>R$ 95.364</td><td>R$ 346.827</td><td>R$ 309.049</td><td>R$ 108.824</td><td>R$ 231.497</td></tr>
+              <tr><th>Propriedade para investimento - Ativos não circulantes mantidos para venda</th><td>R$ 174.134</td><td>R$ 0</td><td>R$ 891.196</td><td>R$ 1.069.435</td><td>R$ 2.294.770</td></tr>
+              <tr class="subtotal asset"><th>Total do ativo circulante</th><td>R$ 9.632.532</td><td>R$ 10.303.472</td><td>R$ 11.661.860</td><td>R$ 13.695.089</td><td>R$ 15.451.511</td></tr>
+
+              <tr class="cat-row asset-sub"><td colspan="6">Ativo não circulante</td></tr>
+              <tr class="cat-row asset-long"><td colspan="6">Realizável a longo prazo</td></tr>
+              <tr><th>Títulos e valores mobiliários</th><td>R$ 309.131</td><td>R$ 373.709</td><td>R$ 545.123</td><td>R$ 389.980</td><td>R$ 676.476</td></tr>
+              <tr><th>Clientes por incorporação de imóveis</th><td>R$ 1.737.445</td><td>R$ 1.522.830</td><td>R$ 1.764.103</td><td>R$ 3.221.017</td><td>R$ 3.643.573</td></tr>
+              <tr><th>Imóveis a comercializar</th><td>R$ 4.847.627</td><td>R$ 4.644.619</td><td>R$ 4.017.354</td><td>R$ 3.740.642</td><td>R$ 3.454.955</td></tr>
+              <tr><th>Impostos diferidos ativos</th><td>R$ 0</td><td>R$ 0</td><td>R$ 0</td><td>R$ 188.068</td><td>R$ 188.068</td></tr>
+              <tr><th>Créditos com empresas ligadas</th><td>R$ 68.227</td><td>R$ 74.095</td><td>R$ 143.266</td><td>R$ 94.838</td><td>R$ 98.728</td></tr>
+              <tr><th>Despesas antecipadas</th><td>R$ 43.955</td><td>R$ 65.043</td><td>R$ 85.610</td><td>R$ 246.313</td><td>R$ 233.623</td></tr>
+              <tr><th>Instrumentos financeiros derivativos</th><td>R$ 28.281</td><td>R$ 33.069</td><td>R$ 43.233</td><td>R$ 0</td><td>R$ 0</td></tr>
+              <tr><th>Outros ativos não circulantes</th><td>R$ 352.833</td><td>R$ 337.491</td><td>R$ 573.147</td><td>R$ 809.933</td><td>R$ 960.639</td></tr>
+              <tr class="subtotal asset2"><th>Total do ativo realizável a longo prazo</th><td>R$ 7.387.499</td><td>R$ 7.050.856</td><td>R$ 7.171.836</td><td>R$ 8.690.791</td><td>R$ 9.256.062</td></tr>
+
+              <tr class="cat-row asset-invest"><td colspan="6">Investimentos</td></tr>
+              <tr><th>Participações em investidas</th><td>R$ 190.530</td><td>R$ 191.366</td><td>R$ 313.608</td><td>R$ 355.233</td><td>R$ 333.573</td></tr>
+              <tr><th>Propriedades para investimento</th><td>R$ 2.319.080</td><td>R$ 4.096.163</td><td>R$ 4.033.526</td><td>R$ 5.262.207</td><td>R$ 1.978.765</td></tr>
+
+              <tr class="cat-row asset-fixed"><td colspan="6">Imobilizado e intangível</td></tr>
+              <tr><th>Imobilizado</th><td>R$ 614.443</td><td>R$ 778.390</td><td>R$ 979.159</td><td>R$ 1.245.487</td><td>R$ 1.280.595</td></tr>
+              <tr><th>Intangível</th><td>R$ 177.344</td><td>R$ 181.082</td><td>R$ 182.313</td><td>R$ 181.880</td><td>R$ 228.781</td></tr>
+              <tr class="subtotal asset3"><th>Total do ativo não circulante</th><td>R$ 10.688.896</td><td>R$ 12.297.857</td><td>R$ 13.409.842</td><td>R$ 15.735.598</td><td>R$ 13.077.776</td></tr>
+              <tr class="grand-total"><th>Total do ativo</th><td>R$ 20.321.428</td><td>R$ 22.601.329</td><td>R$ 25.071.702</td><td>R$ 29.430.687</td><td>R$ 28.529.287</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================ PASSIVO ================ -->
+    <section class="section" id="passivo">
+      <div class="panel">
+        <h2>Passivo e Patrimônio Líquido</h2>
+        <p class="lead">Estrutura de capital: obrigações circulantes, não circulantes e patrimônio líquido. Valores em milhares de reais.</p>
+
+        <div class="chart-grid">
+          <div class="chart-box">
+            <h4>Evolução da Estrutura de Capital</h4>
+            <div class="chart-canvas"><canvas id="chartPassivoEvol"></canvas></div>
+          </div>
+          <div class="chart-box">
+            <h4>Dívida Financeira Total (R$ mil)</h4>
+            <div class="chart-canvas"><canvas id="chartDivida"></canvas></div>
+          </div>
+        </div>
+
+        <div class="table-shell">
+          <table>
+            <thead>
+              <tr><th>Linha</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th><th>2025</th></tr>
+            </thead>
+            <tbody>
+              <tr class="cat-row pass-main"><td colspan="6">Passivo circulante</td></tr>
+              <tr><th>Fornecedores</th><td>R$ 716.428</td><td>R$ 895.087</td><td>R$ 724.177</td><td>R$ 851.597</td><td>R$ 865.422</td></tr>
+              <tr><th>Contas a pagar por aquisição de investimento</th><td>R$ 26.634</td><td>R$ 34.730</td><td>R$ 21.758</td><td>R$ 10.647</td><td>R$ 20.959</td></tr>
+              <tr><th>Instrumentos financeiros derivativos</th><td>R$ 0</td><td>R$ 213.063</td><td>R$ 0</td><td>R$ 45.972</td><td>R$ 24.105</td></tr>
+              <tr><th>Empréstimos, financiamentos e debêntures</th><td>R$ 859.817</td><td>R$ 1.148.232</td><td>R$ 1.365.635</td><td>R$ 3.177.766</td><td>R$ 1.237.427</td></tr>
+              <tr><th>Contas a pagar por aquisição de terrenos</th><td>R$ 768.854</td><td>R$ 961.985</td><td>R$ 898.135</td><td>R$ 934.260</td><td>R$ 982.064</td></tr>
+              <tr><th>Adiantamentos de clientes</th><td>R$ 227.884</td><td>R$ 230.772</td><td>R$ 290.165</td><td>R$ 269.384</td><td>R$ 563.842</td></tr>
+              <tr><th>Obrigações sociais e trabalhistas</th><td>R$ 178.370</td><td>R$ 178.099</td><td>R$ 224.535</td><td>R$ 238.631</td><td>R$ 290.904</td></tr>
+              <tr><th>Obrigações fiscais</th><td>R$ 120.369</td><td>R$ 145.824</td><td>R$ 153.260</td><td>R$ 156.832</td><td>R$ 186.737</td></tr>
+              <tr><th>Provisão para manutenção de imóveis</th><td>R$ 46.367</td><td>R$ 55.871</td><td>R$ 78.145</td><td>R$ 106.446</td><td>R$ 91.355</td></tr>
+              <tr><th>Impostos diferidos passivos</th><td>R$ 79.056</td><td>R$ 84.825</td><td>R$ 66.325</td><td>R$ 83.044</td><td>R$ 106.201</td></tr>
+              <tr><th>Dividendos propostos</th><td>R$ 194.205</td><td>R$ 0</td><td>R$ 0</td><td>R$ 0</td><td>R$ 0</td></tr>
+              <tr><th>Passivo a descoberto - participações em investidas</th><td>R$ 375.103</td><td>R$ 421.256</td><td>R$ 482.733</td><td>R$ 569.992</td><td>R$ 603.076</td></tr>
+              <tr><th>Passivo de cessão</th><td>R$ 63.593</td><td>R$ 248.350</td><td>R$ 390.760</td><td>R$ 682.881</td><td>R$ 826.488</td></tr>
+              <tr><th>Outras contas a pagar / outros passivos</th><td>R$ 323.202</td><td>R$ 445.638</td><td>R$ 450.561</td><td>R$ 506.547</td><td>R$ 568.805</td></tr>
+              <tr><th>Empréstimos, financiamentos e debêntures - ativos não circulantes mantidos para venda</th><td>R$ 131.142</td><td>R$ 0</td><td>R$ 480.029</td><td>R$ 507.831</td><td>R$ 1.258.146</td></tr>
+              <tr class="subtotal pass"><th>Total do passivo circulante</th><td>R$ 4.111.024</td><td>R$ 5.063.732</td><td>R$ 5.626.218</td><td>R$ 8.141.830</td><td>R$ 7.625.531</td></tr>
+
+              <tr class="cat-row pass-long"><td colspan="6">Passivo não circulante</td></tr>
+              <tr><th>Contas a pagar por aquisição de investimento</th><td>R$ 21.001</td><td>R$ 20.866</td><td>R$ 13.981</td><td>R$ 9.019</td><td>R$ 13.346</td></tr>
+              <tr><th>Instrumentos financeiros derivativos</th><td>R$ 105.156</td><td>R$ 162.936</td><td>R$ 43.233</td><td>R$ 148.593</td><td>R$ 32.866</td></tr>
+              <tr><th>Empréstimos, financiamentos e debêntures</th><td>R$ 4.372.960</td><td>R$ 6.280.944</td><td>R$ 6.481.636</td><td>R$ 6.602.852</td><td>R$ 7.364.579</td></tr>
+              <tr><th>Contas a pagar por aquisição de terrenos</th><td>R$ 4.029.933</td><td>R$ 3.330.656</td><td>R$ 2.520.773</td><td>R$ 2.461.116</td><td>R$ 2.408.599</td></tr>
+              <tr><th>Adiantamentos de clientes</th><td>R$ 328.848</td><td>R$ 253.542</td><td>R$ 158.462</td><td>R$ 158.309</td><td>R$ 252.132</td></tr>
+              <tr><th>Provisão para manutenção de imóveis</th><td>R$ 160.195</td><td>R$ 187.970</td><td>R$ 200.359</td><td>R$ 224.243</td><td>R$ 247.914</td></tr>
+              <tr><th>Provisões para riscos cíveis, trabalhistas e tributários</th><td>R$ 94.677</td><td>R$ 72.829</td><td>R$ 108.450</td><td>R$ 117.188</td><td>R$ 97.441</td></tr>
+              <tr><th>Impostos diferidos passivos</th><td>R$ 176.513</td><td>R$ 92.230</td><td>R$ 96.867</td><td>R$ 96.710</td><td>R$ 133.141</td></tr>
+              <tr><th>Passivo de cessão</th><td>R$ 58.748</td><td>R$ 109.256</td><td>R$ 1.644.001</td><td>R$ 3.096.095</td><td>R$ 3.485.674</td></tr>
+              <tr><th>Outras contas a pagar / outros passivos</th><td>R$ 288.747</td><td>R$ 452.060</td><td>R$ 613.080</td><td>R$ 904.309</td><td>R$ 712.867</td></tr>
+              <tr class="subtotal pass2"><th>Total do passivo não circulante</th><td>R$ 9.636.778</td><td>R$ 10.963.289</td><td>R$ 11.880.842</td><td>R$ 13.818.434</td><td>R$ 14.748.559</td></tr>
+              <tr class="subtotal pass2"><th>Total do passivo</th><td>R$ 13.747.802</td><td>R$ 16.027.021</td><td>R$ 17.507.060</td><td>R$ 21.960.264</td><td>R$ 22.374.090</td></tr>
+
+              <tr class="cat-row pl-main"><td colspan="6">Patrimônio líquido</td></tr>
+              <tr><th>Capital social</th><td>R$ 4.615.171</td><td>R$ 4.615.408</td><td>R$ 5.616.600</td><td>R$ 5.620.947</td><td>R$ 5.620.947</td></tr>
+              <tr><th>Ações em tesouraria</th><td>R$ -388</td><td>R$ -388</td><td>R$ -388</td><td>R$ -388</td><td>R$ -388</td></tr>
+              <tr><th>Reservas de capital</th><td>R$ 71.969</td><td>R$ 88.734</td><td>R$ 58.210</td><td>R$ 72.849</td><td>R$ 0</td></tr>
+              <tr><th>Reservas de lucros</th><td>R$ 1.332.905</td><td>R$ 1.148.381</td><td>R$ 1.104.356</td><td>R$ 565.633</td><td>R$ 0</td></tr>
+              <tr><th>Ajuste de avaliação patrimonial</th><td>R$ 73.977</td><td>R$ -24.692</td><td>R$ -33.423</td><td>R$ 173.548</td><td>R$ 111.188</td></tr>
+              <tr><th>Prejuízos acumulados</th><td>R$ 0</td><td>R$ 0</td><td>R$ 0</td><td>R$ 0</td><td class="neg">R$ -403.935</td></tr>
+              <tr><th>Patrimônio líquido atribuível a acionistas da controladora</th><td>R$ 6.093.634</td><td>R$ 5.827.443</td><td>R$ 6.745.355</td><td>R$ 6.432.589</td><td>R$ 5.327.812</td></tr>
+              <tr><th>Participações não controladoras</th><td>R$ 479.992</td><td>R$ 746.865</td><td>R$ 819.287</td><td>R$ 1.037.834</td><td>R$ 827.385</td></tr>
+              <tr class="subtotal pl"><th>Total do patrimônio líquido</th><td>R$ 6.573.626</td><td>R$ 6.574.308</td><td>R$ 7.564.642</td><td>R$ 7.470.423</td><td>R$ 6.155.197</td></tr>
+              <tr class="grand-total"><th>Total do passivo e patrimônio líquido</th><td>R$ 20.321.428</td><td>R$ 22.601.329</td><td>R$ 25.071.702</td><td>R$ 29.430.687</td><td>R$ 28.529.287</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================ DRE ================ -->
+    <section class="section" id="dre">
+      <div class="panel">
+        <h2>DRE — Nova Estrutura (IFRS 18 / CPC 51)</h2>
+        <p class="lead">Demonstração do Resultado estruturada por categorias: operacional, investimento, financiamento e tributos. Valores em milhares de reais.</p>
+
+        <div class="chart-grid">
+          <div class="chart-box">
+            <h4>Receita Líquida vs. Lucro Líquido (R$ mil)</h4>
+            <div class="chart-canvas"><canvas id="chartReceitaLL"></canvas></div>
+          </div>
+          <div class="chart-box">
+            <h4>Evolução das Margens (%)</h4>
+            <div class="chart-canvas"><canvas id="chartMargens"></canvas></div>
+          </div>
+        </div>
+
+        <div class="table-shell">
+          <table>
+            <thead>
+              <tr><th>Linha</th><th>Categoria</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th><th>2025</th></tr>
+            </thead>
+            <tbody>
+              <tr class="cat-row op"><td colspan="7">Categoria operacional</td></tr>
+              <tr><th>Receita operacional líquida</th><td><span class="tag operacional">Operacional</span></td><td>R$ 7.106.201</td><td>R$ 6.645.285</td><td>R$ 7.429.915</td><td>R$ 9.009.035</td><td>R$ 10.906.236</td></tr>
+              <tr><th>(-) Custo dos imóveis vendidos e serviços prestados</th><td><span class="tag operacional">Operacional</span></td><td>R$ -5.277.356</td><td>R$ -5.327.731</td><td>R$ -5.742.737</td><td>R$ -6.633.159</td><td>R$ -7.706.442</td></tr>
+              <tr><th>(-) Despesas com vendas</th><td><span class="tag operacional">Operacional</span></td><td>R$ -642.309</td><td>R$ -661.701</td><td>R$ -755.131</td><td>R$ -797.357</td><td>R$ -962.515</td></tr>
+              <tr><th>(-) Despesas gerais e administrativas</th><td><span class="tag operacional">Operacional</span></td><td>R$ -503.390</td><td>R$ -610.568</td><td>R$ -653.368</td><td>R$ -678.056</td><td>R$ -627.521</td></tr>
+              <tr><th>(+/-) Outras receitas (despesas) operacionais, líquidas</th><td><span class="tag operacional">Operacional</span></td><td>R$ 498.313</td><td>R$ 426.937</td><td>R$ -124.309</td><td>R$ -326.463</td><td>R$ -1.294.614</td></tr>
+              <tr class="subtotal op"><th>Lucro operacional (pré-investimentos)</th><td></td><td>R$ 1.181.459</td><td>R$ 472.222</td><td>R$ 154.370</td><td>R$ 574.000</td><td>R$ 315.144</td></tr>
+
+              <tr class="cat-row inv"><td colspan="7">Categoria de investimento</td></tr>
+              <tr><th>(+/-) Resultado de equivalência patrimonial</th><td><span class="tag investimento">Investimento</span></td><td>R$ -52.349</td><td>R$ -109.840</td><td>R$ -84.509</td><td>R$ -140.460</td><td>R$ -113.948</td></tr>
+              <tr><th>(+/-) Ganhos/perdas em outros investimentos</th><td><span class="tag investimento">Investimento</span></td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+              <tr><th>(+/-) Dividendos e juros recebidos fora da operação principal</th><td><span class="tag investimento">Investimento</span></td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+              <tr class="subtotal inv"><th>Lucro antes do resultado financeiro e tributos</th><td></td><td>R$ 1.129.110</td><td>R$ 362.382</td><td>R$ 69.861</td><td>R$ 433.540</td><td>R$ 201.196</td></tr>
+
+              <tr class="cat-row fin"><td colspan="7">Categoria de financiamento</td></tr>
+              <tr><th>(-) Despesas financeiras</th><td><span class="tag financiamento">Financiamento</span></td><td>R$ -238.204</td><td>R$ -594.126</td><td>R$ -467.360</td><td>R$ -1.264.546</td><td>R$ -1.611.704</td></tr>
+              <tr><th>(+) Receitas financeiras</th><td><span class="tag financiamento">Financiamento</span></td><td>R$ 140.692</td><td>R$ 249.598</td><td>R$ 220.740</td><td>R$ 369.767</td><td>R$ 380.991</td></tr>
+              <tr><th>(+) Receitas financeiras provenientes dos clientes por incorporação de imóveis</th><td><span class="tag financiamento">Financiamento</span></td><td>R$ 122.604</td><td>R$ 107.739</td><td>R$ 103.372</td><td>R$ 127.630</td><td>R$ 189.052</td></tr>
+              <tr class="subtotal fin"><th>Lucro (prejuízo) antes do imposto de renda e da contribuição social</th><td></td><td>R$ 1.154.202</td><td>R$ 125.593</td><td class="neg">R$ -73.387</td><td class="neg">R$ -333.609</td><td class="neg">R$ -840.465</td></tr>
+
+              <tr class="cat-row tax"><td colspan="7">Tributos sobre o lucro</td></tr>
+              <tr><th>(-) Imposto de renda e contribuição social correntes</th><td><span class="tag tributos">Tributos</span></td><td>R$ -160.106</td><td>R$ -318.304</td><td>R$ -157.050</td><td>R$ -131.202</td><td>R$ -174.176</td></tr>
+              <tr><th>(+/-) Imposto de renda e contribuição social diferidos</th><td><span class="tag tributos">Tributos</span></td><td>R$ -117.291</td><td>R$ 69.248</td><td>R$ 211.998</td><td>R$ -17.286</td><td>R$ -28.063</td></tr>
+              <tr class="subtotal tax"><th>Imposto de renda e contribuição social</th><td></td><td>R$ -277.397</td><td>R$ -249.056</td><td>R$ 54.948</td><td>R$ -148.488</td><td>R$ -202.239</td></tr>
+
+              <tr class="cat-row final"><td colspan="7">Lucro / prejuízo líquido do exercício</td></tr>
+              <tr><th>Lucro (prejuízo) líquido do exercício</th><td><span class="tag resultado">Resultado</span></td><td class="pos">R$ 876.805</td><td class="neg">R$ -123.463</td><td class="neg">R$ -18.439</td><td class="neg">R$ -482.097</td><td class="neg">R$ -1.042.704</td></tr>
+              <tr><th>Acionistas controladores</th><td><span class="tag resultado">Resultado</span></td><td class="pos">R$ 779.073</td><td class="neg">R$ -176.648</td><td class="neg">R$ -29.815</td><td class="neg">R$ -503.202</td><td class="neg">R$ -1.042.256</td></tr>
+              <tr class="grand-total"><th>Participação dos não controladores</th><td><span class="tag resultado">Resultado</span></td><td>R$ 97.732</td><td>R$ 53.185</td><td>R$ 11.376</td><td>R$ 21.105</td><td>R$ -448</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================ ÍNDICES ================ -->
+    <section class="section" id="indices">
+      <div class="panel">
+        <h2>Índices e Indicadores</h2>
+        <p class="lead">Percentuais, múltiplos e valores calculados a partir das demonstrações 2021–2025. Passe o mouse sobre o ícone <span class="tip" data-tip="Este é o comportamento do tooltip: passe o mouse sobre o ícone para ver a fórmula de cálculo">ⓘ</span> ao lado do indicador para ver a fórmula-base. Valores monetários em R$ milhões.</p>
+
+        <div class="idx-strip-grid">
+          <article class="idx-strip">
+            <div class="idx-strip-head">
+              <div class="idx-strip-title"><span>Destaque 2025</span><strong>Liquidez corrente</strong></div>
+              <div class="idx-icon idx-i-blue">↗</div>
+            </div>
+            <div class="idx-strip-value">2,03x</div>
+            <div class="idx-strip-foot">
+              <span class="idx-badge idx-b-blue">▲ 20,8% vs. 2024</span>
+              <span class="idx-strip-note">base 2024: 1,68x</span>
+            </div>
+          </article>
+
+          <article class="idx-strip">
+            <div class="idx-strip-head">
+              <div class="idx-strip-title"><span>Destaque 2025</span><strong>Margem bruta</strong></div>
+              <div class="idx-icon idx-i-teal">◔</div>
+            </div>
+            <div class="idx-strip-value">29,3%</div>
+            <div class="idx-strip-foot">
+              <span class="idx-badge idx-b-teal">▲ 2,9 p.p. vs. 2024</span>
+              <span class="idx-strip-note">base 2024: 26,4%</span>
+            </div>
+          </article>
+
+          <article class="idx-strip">
+            <div class="idx-strip-head">
+              <div class="idx-strip-title"><span>Destaque 2025</span><strong>EBITDA</strong></div>
+              <div class="idx-icon idx-i-violet">◫</div>
+            </div>
+            <div class="idx-strip-value">R$ 1.156</div>
+            <div class="idx-strip-foot">
+              <span class="idx-badge idx-b-violet">▲ 18,2% vs. 2024</span>
+              <span class="idx-strip-note">base 2024: R$ 977</span>
+            </div>
+          </article>
+
+          <article class="idx-strip">
+            <div class="idx-strip-head">
+              <div class="idx-strip-title"><span>Destaque 2025</span><strong>ROE</strong></div>
+              <div class="idx-icon idx-i-red">↓</div>
+            </div>
+            <div class="idx-strip-value">-16,9%</div>
+            <div class="idx-strip-foot">
+              <span class="idx-badge idx-b-red">▼ 10,4 p.p. vs. 2024</span>
+              <span class="idx-strip-note">base 2024: -6,5%</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="idx-exec-grid">
+          <div class="exec-box">
+            <h3>Semáforos de tendência — 2025 x 2024</h3>
+            <div class="signal-list">
+              <div class="signal-row"><span class="label">Liquidez corrente</span><span class="semaforo sem-up">Melhora</span><span class="value">1,68x → 2,03x</span></div>
+              <div class="signal-row"><span class="label">Liquidez geral</span><span class="semaforo sem-up">Melhora</span><span class="value">1,02x → 1,11x</span></div>
+              <div class="signal-row"><span class="label">Endividamento geral</span><span class="semaforo sem-down">Piora</span><span class="value">74,6% → 78,4%</span></div>
+              <div class="signal-row"><span class="label">Margem EBITDA</span><span class="semaforo sem-flat">Leve queda</span><span class="value">10,8% → 10,6%</span></div>
+              <div class="signal-row"><span class="label">Margem bruta</span><span class="semaforo sem-up">Melhora</span><span class="value">26,4% → 29,3%</span></div>
+              <div class="signal-row"><span class="label">Margem líquida</span><span class="semaforo sem-down">Piora</span><span class="value">-5,6% → -9,6%</span></div>
+            </div>
+          </div>
+
+          <div class="exec-box">
+            <h3>Variações-chave apuradas</h3>
+            <div class="signal-list">
+              <div class="signal-row"><span class="label">Receita líquida</span><span class="pp-badge">+21,1%</span><span class="value">10.906 vs. 9.009</span></div>
+              <div class="signal-row"><span class="label">Lucro bruto</span><span class="pp-badge">+34,7%</span><span class="value">3.200 vs. 2.376</span></div>
+              <div class="signal-row"><span class="label">EBITDA</span><span class="pp-badge">+18,2%</span><span class="value">1.156 vs. 977</span></div>
+              <div class="signal-row"><span class="label">Lucro líquido controladora</span><span class="pp-badge">-107,1%</span><span class="value">(1.042) vs. (503)</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mini-kpis">
+          <div class="mini-kpi"><span>Capitalização 2025</span><strong>21,6%</strong><small>vs. 25,4% em 2024</small></div>
+          <div class="mini-kpi"><span>Dívida Líquida / EBITDA</span><strong>6,07x</strong><small>vs. 7,23x em 2024</small></div>
+          <div class="mini-kpi"><span>Capital de giro 2025</span><strong>R$ 7.826</strong><small>vs. R$ 5.553 em 2024</small></div>
+          <div class="mini-kpi"><span>Tesouraria 2025</span><strong>R$ 2.849</strong><small>vs. R$ 3.739 em 2024</small></div>
+          <div class="mini-kpi"><span>ROA 2025</span><strong>-3,7%</strong><small>vs. -1,6% em 2024</small></div>
+        </div>
+
+        <div class="table-shell">
+          <table>
+            <thead>
+              <tr><th>Índice</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th><th>2025</th></tr>
+            </thead>
+            <tbody>
+              <tr class="cat-row asset-main"><td colspan="6">ESTRUTURA DE CAPITAIS</td></tr>
+              <tr><th>Capitalização <span class="tip" data-tip="Patrimônio Líquido / Ativo Total">ⓘ</span></th><td>32,3%</td><td>29,1%</td><td>30,2%</td><td>25,4%</td><td>21,6%</td></tr>
+              <tr><th>Participação de Capitais de Terceiros <span class="tip" data-tip="Exigível Total / Patrimônio Líquido">ⓘ</span></th><td>2,09x</td><td>2,44x</td><td>2,31x</td><td>2,94x</td><td>3,63x</td></tr>
+              <tr><th>Imobilização dos Recursos Não-Correntes <span class="tip" data-tip="Ativo Permanente / (Passivo Não Circulante + Patrimônio Líquido). AP = Ativo Não Circulante − Realizável a Longo Prazo">ⓘ</span></th><td>20,4%</td><td>29,9%</td><td>32,1%</td><td>33,1%</td><td>18,3%</td></tr>
+
+              <tr class="cat-row asset-sub"><td colspan="6">ANÁLISE DA LIQUIDEZ</td></tr>
+              <tr><th>Necessidade de capital de giro <span class="tip" data-tip="Ativo Circulante − Disponibilidades − Passivo Circulante">ⓘ</span></th><td>R$ 3.081</td><td>R$ 2.721</td><td>R$ 3.298</td><td>R$ 1.814</td><td>R$ 4.977</td></tr>
+              <tr><th>Capital de giro <span class="tip" data-tip="Ativo Circulante − Passivo Circulante">ⓘ</span></th><td>R$ 5.522</td><td>R$ 5.240</td><td>R$ 6.036</td><td>R$ 5.553</td><td>R$ 7.826</td></tr>
+              <tr><th>Tesouraria <span class="tip" data-tip="Capital de Giro Líquido − Necessidade de Capital de Giro. Equivale às disponibilidades líquidas">ⓘ</span></th><td>R$ 2.441</td><td>R$ 2.518</td><td>R$ 2.737</td><td>R$ 3.739</td><td>R$ 2.849</td></tr>
+              <tr><th>Liquidez corrente <span class="tip" data-tip="Ativo Circulante / Passivo Circulante">ⓘ</span></th><td>2,34x</td><td>2,03x</td><td>2,07x</td><td>1,68x</td><td>2,03x</td></tr>
+              <tr><th>Liquidez geral <span class="tip" data-tip="(Ativo Circulante + Realizável a Longo Prazo) / (Passivo Circulante + Passivo Não Circulante)">ⓘ</span></th><td>1,24x</td><td>1,09x</td><td>1,08x</td><td>1,02x</td><td>1,11x</td></tr>
+
+              <tr class="cat-row pass-main"><td colspan="6">ANÁLISE DO ENDIVIDAMENTO</td></tr>
+              <tr><th>Endividamento geral <span class="tip" data-tip="(Passivo Circulante + Passivo Não Circulante) / Ativo Total">ⓘ</span></th><td>67,6%</td><td>70,9%</td><td>69,8%</td><td>74,6%</td><td>78,4%</td></tr>
+              <tr><th>Endividamento de curto prazo <span class="tip" data-tip="Passivo Circulante / Ativo Total">ⓘ</span></th><td>20,2%</td><td>22,4%</td><td>22,4%</td><td>27,7%</td><td>26,7%</td></tr>
+              <tr><th>Endividamento de longo prazo <span class="tip" data-tip="Passivo Não Circulante / Ativo Total">ⓘ</span></th><td>47,4%</td><td>48,5%</td><td>47,4%</td><td>46,9%</td><td>51,7%</td></tr>
+              <tr><th>Composição do endividamento de curto prazo <span class="tip" data-tip="Passivo Circulante / (Passivo Circulante + Passivo Não Circulante)">ⓘ</span></th><td>29,9%</td><td>31,6%</td><td>32,1%</td><td>37,1%</td><td>34,1%</td></tr>
+              <tr><th>Dívida Líquida + Terrenos / PL <span class="tip" data-tip="(Dívida financeira bruta − disponibilidades + terrenos a pagar) / Patrimônio Líquido">ⓘ</span></th><td>1,17x</td><td>1,40x</td><td>1,19x</td><td>1,33x</td><td>1,69x</td></tr>
+              <tr><th>Dívida Líquida / EBITDA <span class="tip" data-tip="(Dívida financeira bruta − disponibilidades) / EBITDA. EBITDA conforme quadro LAJIDA dos relatórios anuais">ⓘ</span></th><td>2,08x</td><td>5,97x</td><td>12,07x</td><td>7,23x</td><td>6,07x</td></tr>
+
+              <tr class="cat-row asset-invest"><td colspan="6">ANÁLISE DE SOLVÊNCIA</td></tr>
+              <tr><th>Solvência geral <span class="tip" data-tip="Ativo Total / (Passivo Circulante + Passivo Não Circulante)">ⓘ</span></th><td>1,48x</td><td>1,41x</td><td>1,43x</td><td>1,34x</td><td>1,28x</td></tr>
+              <tr><th>Imobilização do capital próprio <span class="tip" data-tip="Ativo Permanente / Patrimônio Líquido. AP = Ativo Não Circulante − Realizável a Longo Prazo">ⓘ</span></th><td>50,2%</td><td>79,8%</td><td>82,5%</td><td>94,3%</td><td>62,1%</td></tr>
+
+              <tr class="cat-row pl-main"><td colspan="6">ANÁLISE DA RENTABILIDADE</td></tr>
+              <tr><th>Rentabilidade do patrimônio líquido (ROE) <span class="tip" data-tip="Lucro líquido do exercício / Patrimônio Líquido total">ⓘ</span></th><td>13,3%</td><td>-1,9%</td><td>-0,2%</td><td>-6,5%</td><td>-16,9%</td></tr>
+              <tr><th>Rentabilidade do ativo (ROA) <span class="tip" data-tip="Lucro líquido / Ativo Total">ⓘ</span></th><td>4,3%</td><td>-0,5%</td><td>-0,1%</td><td>-1,6%</td><td>-3,7%</td></tr>
+              <tr><th>EBITDA <span class="tip" data-tip="Lucro antes dos juros, impostos, depreciação e amortização. Conforme relatórios anuais (R$ milhões)">ⓘ</span></th><td>R$ 1.406</td><td>R$ 822</td><td>R$ 463</td><td>R$ 977</td><td>R$ 1.156</td></tr>
+              <tr><th>EBIT <span class="tip" data-tip="Lucro antes do resultado financeiro e tributos (R$ milhões)">ⓘ</span></th><td>R$ 1.129</td><td>R$ 362</td><td>R$ 70</td><td>R$ 434</td><td>R$ 201</td></tr>
+              <tr><th>Margem EBITDA <span class="tip" data-tip="EBITDA / Receita Líquida">ⓘ</span></th><td>19,8%</td><td>12,4%</td><td>6,2%</td><td>10,8%</td><td>10,6%</td></tr>
+              <tr><th>Margem líquida <span class="tip" data-tip="Lucro Líquido / Receita Líquida">ⓘ</span></th><td>12,3%</td><td>-1,9%</td><td>-0,2%</td><td>-5,6%</td><td>-9,6%</td></tr>
+              <tr><th>Margem bruta <span class="tip" data-tip="Lucro Bruto / Receita Líquida">ⓘ</span></th><td>25,7%</td><td>19,8%</td><td>22,7%</td><td>26,4%</td><td>29,3%</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="insight-box">
+          <strong>Nota técnica (Millennium):</strong> Valores de Imobilização do Capital Próprio e ROE foram recalculados nesta versão para manter coerência com os dados do balanço. Para os demais indicadores, os cálculos estão conforme a fórmula exibida no tooltip. Disponibilidades = Caixa e equivalentes + Títulos e Valores Mobiliários (circulante); Dívida financeira bruta = Empréstimos, financiamentos e debêntures (PC + PNC + mantidos para venda).
+        </div>
+      </div>
+    </section>
+
+    <!-- ================ PROJEÇÃO ================ -->
+    <section class="section" id="projecao">
+      <div class="panel">
+        <h2>Projeção de Tendência — 2026 e 2027</h2>
+        <p class="lead">Projeções estatísticas baseadas em regressão linear sobre a série histórica 2021–2025, com cenários pessimista, base e otimista. Valores em milhares de reais, exceto quando indicado.</p>
+
+        <div class="projection-alert">
+          <strong>⚠ Alerta de risco:</strong> A tendência histórica (2021–2025) indica continuidade de prejuízos, com deterioração projetada do resultado líquido. A empresa precisa reestruturar o passivo financeiro ou renegociar prazos para reverter a trajetória — caso contrário, em 2027 o prejuízo projetado pode superar R$ 1,8 bilhão no cenário base.
+        </div>
+
+        <div class="chart-grid">
+          <div class="chart-box">
+            <h4>Projeção Receita Líquida (R$ mil)</h4>
+            <div class="chart-canvas"><canvas id="chartProjReceita"></canvas></div>
+          </div>
+          <div class="chart-box">
+            <h4>Projeção Lucro Líquido (R$ mil)</h4>
+            <div class="chart-canvas"><canvas id="chartProjLL"></canvas></div>
+          </div>
+        </div>
+
+        <div class="table-shell" style="margin-top: 18px;">
+          <table>
+            <thead>
+              <tr><th>Indicador</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th><th>2025</th><th>2026 (proj.)</th><th>2027 (proj.)</th></tr>
+            </thead>
+            <tbody>
+              <tr class="cat-row proj-main"><td colspan="8">CENÁRIO BASE (Regressão Linear)</td></tr>
+              <tr><th>Receita líquida <span class="tip" data-tip="Regressão linear: y = 996.382x + 5.230.188 (x = ano; 2026 = 6)">ⓘ</span></th><td>R$ 7.106</td><td>R$ 6.645</td><td>R$ 7.430</td><td>R$ 9.009</td><td>R$ 10.906</td><td><span class="tag projecao">R$ 11.208</span></td><td><span class="tag projecao">R$ 12.205</span></td></tr>
+              <tr><th>EBITDA (R$ milhões) <span class="tip" data-tip="Regressão: y = −34,5x + 1.068. Tendência de leve queda pela pressão do resultado financeiro">ⓘ</span></th><td>R$ 1.406</td><td>R$ 822</td><td>R$ 463</td><td>R$ 977</td><td>R$ 1.156</td><td><span class="tag projecao">R$ 861</span></td><td><span class="tag projecao">R$ 827</span></td></tr>
+              <tr><th>Margem bruta <span class="tip" data-tip="Tendência positiva: crescimento médio de ~0,9 p.p./ano na série">ⓘ</span></th><td>25,7%</td><td>19,8%</td><td>22,7%</td><td>26,4%</td><td>29,3%</td><td><span class="tag projecao">28,7%</span></td><td><span class="tag projecao">30,0%</span></td></tr>
+              <tr><th>Lucro líquido <span class="tip" data-tip="Regressão: y = −419.765x + 1.101.315. Trajetória de prejuízos crescentes">ⓘ</span></th><td class="pos">R$ 877</td><td class="neg">R$ -123</td><td class="neg">R$ -18</td><td class="neg">R$ -482</td><td class="neg">R$ -1.043</td><td><span class="tag projecao neg">R$ -1.417</span></td><td><span class="tag projecao neg">R$ -1.837</span></td></tr>
+              <tr><th>Despesas financeiras <span class="tip" data-tip="Crescimento médio anual de +37% a.a., projeção conservadora">ⓘ</span></th><td class="neg">R$ -238</td><td class="neg">R$ -594</td><td class="neg">R$ -467</td><td class="neg">R$ -1.265</td><td class="neg">R$ -1.612</td><td><span class="tag projecao neg">R$ -1.946</span></td><td><span class="tag projecao neg">R$ -2.279</span></td></tr>
+
+              <tr class="cat-row proj-main"><td colspan="8">CENÁRIOS COMPARATIVOS — Lucro Líquido 2026 e 2027</td></tr>
+              <tr><th>Cenário Pessimista (-20%) <span class="tip" data-tip="Aplicado 20% de desvio negativo sobre o cenário base, simulando agravamento financeiro">ⓘ</span></th><td></td><td></td><td></td><td></td><td></td><td class="neg">R$ -1.700</td><td class="neg">R$ -2.204</td></tr>
+              <tr><th>Cenário Base <span class="tip" data-tip="Regressão linear simples sobre a série 2021–2025">ⓘ</span></th><td></td><td></td><td></td><td></td><td></td><td class="neg">R$ -1.417</td><td class="neg">R$ -1.837</td></tr>
+              <tr><th>Cenário Otimista (+20%) <span class="tip" data-tip="Aplicado 20% de desvio positivo, simulando reversão parcial por reestruturação">ⓘ</span></th><td></td><td></td><td></td><td></td><td></td><td class="neg">R$ -1.134</td><td class="neg">R$ -1.470</td></tr>
+
+              <tr class="cat-row proj-main"><td colspan="8">INDICADORES-CHAVE PROJETADOS — 2026 e 2027</td></tr>
+              <tr><th>Margem líquida projetada</th><td>12,3%</td><td>-1,9%</td><td>-0,2%</td><td>-5,6%</td><td>-9,6%</td><td class="neg">-12,6%</td><td class="neg">-15,0%</td></tr>
+              <tr><th>Margem EBITDA projetada</th><td>19,8%</td><td>12,4%</td><td>6,2%</td><td>10,8%</td><td>10,6%</td><td>7,7%</td><td>6,8%</td></tr>
+              <tr><th>Cobertura de juros (EBIT/Desp.Fin.)</th><td>4,74x</td><td>0,61x</td><td>0,15x</td><td>0,34x</td><td>0,12x</td><td class="neg">~0,10x</td><td class="neg">~0,08x</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="insight-box" style="margin-top: 18px;">
+          <strong>Metodologia:</strong> As projeções utilizam regressão linear simples (Mínimos Quadrados Ordinários) sobre a série 2021–2025. Para o cenário base, y = a·x + b, onde x é o ano-índice (1 a 7) e os coeficientes foram calculados conforme fórmulas exibidas nos tooltips. Cenários pessimista/otimista aplicam desvio de ±20% sobre o valor base. Atenção: regressão linear assume continuidade da tendência — mudanças estruturais (refinanciamento, venda de ativos, IPO secundário) não são capturadas.
+        </div>
+
+        <div class="insight-box" style="background:#fff7ed; border-left-color:#d97706; color:#78350f;">
+          <strong>Recomendação Millennium:</strong> Diante do cenário projetado, sugere-se (i) revisão urgente da estrutura de capital com alongamento da dívida, (ii) aceleração do desinvestimento de propriedades para investimento como fonte de caixa, (iii) avaliação tributária de aproveitamento de prejuízos fiscais (IRPJ/CSLL) até o limite de 30% do lucro real em exercícios futuros, e (iv) revisão da política de hedge cambial e de juros para mitigar o custo financeiro.
+        </div>
+      </div>
+    </section>
+
+    <!-- ================ SOLVÊNCIA ================ -->
+    <section class="section" id="solvencia">
+      <div class="panel">
+        <h2>Análise de Solvência Avançada</h2>
+        <p class="lead">Avaliação do risco de insolvência com indicadores não cobertos pela aba de Índices: cobertura de juros, capacidade de serviço da dívida e Z''-Score de Altman adaptado a mercados emergentes.</p>
+
+        <div class="zscore-box">
+          <h3 style="margin:0 0 6px; font-size:15px;">Z''-Score de Altman — Mercados Emergentes</h3>
+          <p style="margin:0; font-size:12px; color:#475569;">Fórmula: Z'' = 6,56·X₁ + 3,26·X₂ + 6,72·X₃ + 1,05·X₄ &nbsp; | &nbsp; Zonas: &lt; 1,10 insolvência · 1,10 a 2,60 incerteza · &gt; 2,60 segura</p>
+          <div class="zscore-bar">
+            <div class="zscore-marker" style="left: 28.7%;" data-label="2021: 2,87 ✓"></div>
+            <div class="zscore-marker" style="left: 22.2%;" data-label="2022: 2,22"></div>
+            <div class="zscore-marker" style="left: 21.9%;" data-label="2023: 2,19"></div>
+            <div class="zscore-marker" style="left: 17.6%;" data-label="2024: 1,76"></div>
+            <div class="zscore-marker" style="left: 20.9%;" data-label="2025: 2,09"></div>
+          </div>
+          <div class="zscore-zones">
+            <span style="flex:28%;">Insolvência<br/>(Z'' &lt; 1,10)</span>
+            <span style="flex:37%;">Zona de Incerteza<br/>(1,10 ≤ Z'' ≤ 2,60)</span>
+            <span style="flex:35%;">Zona Segura<br/>(Z'' &gt; 2,60)</span>
+          </div>
+        </div>
+
+        <div class="chart-grid">
+          <div class="chart-box">
+            <h4>Cobertura de Juros (EBIT / Despesa Financeira)</h4>
+            <div class="chart-canvas"><canvas id="chartCobertura"></canvas></div>
+          </div>
+          <div class="chart-box">
+            <h4>Evolução Dívida Líquida vs. EBITDA (R$ mi)</h4>
+            <div class="chart-canvas"><canvas id="chartDividaEbitda"></canvas></div>
+          </div>
+        </div>
+
+        <div class="table-shell">
+          <table>
+            <thead>
+              <tr><th>Indicador</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th><th>2025</th><th>Interpretação</th></tr>
+            </thead>
+            <tbody>
+              <tr class="cat-row solv-main"><td colspan="7">MODELOS DE INSOLVÊNCIA</td></tr>
+              <tr><th>Z''-Score Altman (emerg.) <span class="tip" data-tip="Z'' = 6,56·X₁ + 3,26·X₂ + 6,72·X₃ + 1,05·X₄ | X₁=CDG/AT, X₂=LucrAcum/AT, X₃=EBIT/AT, X₄=PL/ExigTotal">ⓘ</span></th><td class="pos">2,87</td><td>2,22</td><td>2,19</td><td class="neg">1,76</td><td>2,09</td><td>Zona de incerteza</td></tr>
+              <tr><th>X₁ — Capital de Giro / Ativo Total</th><td>27,2%</td><td>23,2%</td><td>24,1%</td><td>18,9%</td><td>27,4%</td><td>Recuperação em 2025</td></tr>
+              <tr><th>X₂ — Lucros Retidos / Ativo Total</th><td>6,6%</td><td>5,1%</td><td>4,4%</td><td>1,9%</td><td class="neg">-1,4%</td><td>Reversão negativa</td></tr>
+              <tr><th>X₃ — EBIT / Ativo Total <span class="tip" data-tip="Mede a rentabilidade operacional dos ativos; equivalente ao ROA operacional">ⓘ</span></th><td>5,6%</td><td>1,6%</td><td>0,3%</td><td>1,5%</td><td>0,7%</td><td>Rentabilidade baixa</td></tr>
+              <tr><th>X₄ — PL / Exigível Total <span class="tip" data-tip="Inverso da Participação de Capitais de Terceiros; mede o colchão patrimonial">ⓘ</span></th><td>47,8%</td><td>41,0%</td><td>43,2%</td><td>34,0%</td><td>27,5%</td><td>Erosão consistente</td></tr>
+
+              <tr class="cat-row solv-main"><td colspan="7">CAPACIDADE DE SERVIÇO DA DÍVIDA</td></tr>
+              <tr><th>Cobertura de juros <span class="tip" data-tip="EBIT / Despesas financeiras. &gt;3x saudável; &lt;1,5x preocupante; &lt;1x situação crítica">ⓘ</span></th><td class="pos">4,74x</td><td>0,61x</td><td class="neg">0,15x</td><td class="neg">0,34x</td><td class="neg">0,12x</td><td>Crítica desde 2022</td></tr>
+              <tr><th>Cobertura EBITDA da dívida <span class="tip" data-tip="EBITDA / Despesas financeiras. Mede a capacidade do caixa operacional de quitar os juros">ⓘ</span></th><td class="pos">5,90x</td><td>1,38x</td><td>0,99x</td><td>0,77x</td><td class="neg">0,72x</td><td>Abaixo de 1,0x</td></tr>
+              <tr><th>Dívida Líquida (R$ mi) <span class="tip" data-tip="Dívida financeira bruta − disponibilidades (caixa + TVM circulante)">ⓘ</span></th><td>R$ 2.923</td><td>R$ 4.911</td><td>R$ 5.590</td><td>R$ 7.063</td><td>R$ 7.011</td><td>Patamar elevado</td></tr>
+              <tr><th>Prazo de quitação estimado <span class="tip" data-tip="Dívida Líquida / EBITDA anual, em anos, assumindo uso integral do EBITDA">ⓘ</span></th><td>2,08 anos</td><td>5,97 anos</td><td class="neg">12,07 anos</td><td class="neg">7,23 anos</td><td class="neg">6,07 anos</td><td>Prazo longo</td></tr>
+
+              <tr class="cat-row solv-main"><td colspan="7">SINAIS DE ALERTA (STRESS TEST)</td></tr>
+              <tr><th>Consumo médio de caixa anual (R$ mi) <span class="tip" data-tip="Variação média anual no caixa + equivalentes 2021→2025">ⓘ</span></th><td colspan="5">Redução média de ~R$ 173 mi/ano</td><td class="neg">Alerta</td></tr>
+              <tr><th>Runway — prazo de caixa com status quo <span class="tip" data-tip="Caixa + TVM atuais / consumo médio anual de caixa, sem considerar refinanciamento">ⓘ</span></th><td colspan="5">~16,5 anos (colchão preservado pela liquidez de curto prazo)</td><td>Monitorar</td></tr>
+              <tr><th>Risco de rolagem da dívida CP <span class="tip" data-tip="Empréstimos e debêntures de curto prazo / Disponibilidades. &gt;1x indica dependência de refinanciamento">ⓘ</span></th><td>0,41x</td><td>0,46x</td><td>0,67x</td><td class="neg">0,99x</td><td>0,88x</td><td>Dependência alta</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="insight-box">
+          <strong>Diagnóstico de solvência (Millennium):</strong> A empresa saiu da <em>zona segura</em> do Z''-Score em 2022 e atualmente oscila na <em>zona de incerteza</em>, com piora marcante em 2024. A leve melhora para 2,09 em 2025 é explicada pela recomposição do capital de giro (X₁), mas os componentes de rentabilidade (X₃) e capital próprio (X₄) seguem em deterioração. A cobertura de juros em 0,12x significa que o EBIT cobre apenas ~12% dos juros — dependência total de refinanciamento e de receitas financeiras.
+        </div>
+
+        <div class="insight-box" style="background:#f0fdf4; border-left-color:#0f766e; color:#064e3b;">
+          <strong>Pontos positivos a destacar:</strong> (1) Liquidez corrente robusta (2,03x) mantida mesmo com prejuízos; (2) Capital de giro cresceu R$ 2,27 bi em 2025 vs. 2024; (3) Margem bruta em expansão (29,3%); (4) Reclassificação de propriedades para investimento para o circulante sinaliza desinvestimento estruturado e potencial entrada de caixa futura.
+        </div>
+      </div>
+    </section>
+
+    <div class="brand-banner compact">
+      <div class="brand-badge">M</div>
+      <div class="brand-copy">
+        <h2>Millennium Consultoria Tributária</h2>
+        <p>Contabilidade Consultiva · Manaus – AM</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Navegação de abas
+    const tabs = document.querySelectorAll('.tab');
+    const sections = document.querySelectorAll('.section');
+    tabs.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabs.forEach(b => b.classList.remove('active'));
+        sections.forEach(s => s.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(btn.dataset.tab).classList.add('active');
+      });
+    });
+
+    // ============ Charts ============
+    const anos = ['2021','2022','2023','2024','2025'];
+    const anosProj = ['2021','2022','2023','2024','2025','2026','2027'];
+    const fmt = v => 'R$ ' + v.toLocaleString('pt-BR');
+    const colors = {
+      blue: '#2563eb', teal: '#0f766e', violet: '#7c3aed',
+      red: '#dc2626', amber: '#d97706', green: '#10b981'
+    };
+
+    Chart.defaults.font.family = "Inter, Arial, sans-serif";
+    Chart.defaults.font.size = 11;
+    Chart.defaults.color = '#475569';
+
+    // Ativo Total
+    new Chart(document.getElementById('chartAtivoTotal'), {
+      type: 'bar',
+      data: {
+        labels: anos,
+        datasets: [{
+          label: 'Ativo Total',
+          data: [20321428, 22601329, 25071702, 29430687, 28529287],
+          backgroundColor: colors.blue, borderRadius: 6
+        }]
+      },
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+    });
+
+    // Composição Ativo 2025
+    new Chart(document.getElementById('chartAtivoComp'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Caixa e TVM','Clientes incorp.','Imóveis a comercializar','Realizável LP','Imobilizado+Intangível','Propried. p/ invest.','Outros'],
+        datasets: [{
+          data: [3525475, 7387258, 8891454, 9256062, 1509376, 1978765, 2277667],
+          backgroundColor: [colors.blue, colors.teal, colors.amber, '#a855f7', colors.red, colors.green, '#94a3b8']
+        }]
+      },
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { boxWidth: 12, font: { size: 10 } } } } }
+    });
+
+    // Estrutura de Capital
+    new Chart(document.getElementById('chartPassivoEvol'), {
+      type: 'bar',
+      data: {
+        labels: anos,
+        datasets: [
+          { label: 'Passivo Circulante', data: [4111024,5063732,5626218,8141830,7625531], backgroundColor: colors.red },
+          { label: 'Passivo Não Circulante', data: [9636778,10963289,11880842,13818434,14748559], backgroundColor: colors.amber },
+          { label: 'Patrimônio Líquido', data: [6573626,6574308,7564642,7470423,6155197], backgroundColor: colors.blue }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        scales: { x: { stacked: true }, y: { stacked: true } },
+        plugins: { legend: { position: 'bottom', labels: { boxWidth: 12 } } }
+      }
+    });
+
+    // Dívida financeira
+    new Chart(document.getElementById('chartDivida'), {
+      type: 'line',
+      data: {
+        labels: anos,
+        datasets: [{
+          label: 'Dívida Financeira Bruta', tension: 0.3,
+          data: [5363919, 7429176, 8327300, 10288449, 9860152],
+          backgroundColor: 'rgba(220,38,38,0.12)', borderColor: colors.red,
+          fill: true, borderWidth: 2.5, pointRadius: 4
+        }]
+      },
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+    });
+
+    // Receita vs LL
+    new Chart(document.getElementById('chartReceitaLL'), {
+      type: 'bar',
+      data: {
+        labels: anos,
+        datasets: [
+          { label: 'Receita Líquida', data: [7106201,6645285,7429915,9009035,10906236], backgroundColor: colors.blue, borderRadius:4 },
+          { label: 'Lucro Líquido', data: [876805,-123463,-18439,-482097,-1042704], backgroundColor: ctx => ctx.raw < 0 ? colors.red : colors.green, borderRadius:4 }
+        ]
+      },
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { boxWidth: 12 } } } }
+    });
+
+    // Margens
+    new Chart(document.getElementById('chartMargens'), {
+      type: 'line',
+      data: {
+        labels: anos,
+        datasets: [
+          { label: 'Margem Bruta', data: [25.7,19.8,22.7,26.4,29.3], borderColor: colors.green, tension: 0.3, borderWidth: 2.5, pointRadius: 4 },
+          { label: 'Margem EBITDA', data: [19.8,12.4,6.2,10.8,10.6], borderColor: colors.violet, tension: 0.3, borderWidth: 2.5, pointRadius: 4 },
+          { label: 'Margem Líquida', data: [12.3,-1.9,-0.2,-5.6,-9.6], borderColor: colors.red, tension: 0.3, borderWidth: 2.5, pointRadius: 4 }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { position: 'bottom', labels: { boxWidth: 12 } } },
+        scales: { y: { ticks: { callback: v => v + '%' } } }
+      }
+    });
+
+    // Projeção Receita
+    new Chart(document.getElementById('chartProjReceita'), {
+      type: 'line',
+      data: {
+        labels: anosProj,
+        datasets: [
+          { label: 'Histórico', data: [7106201,6645285,7429915,9009035,10906236,null,null], borderColor: colors.blue, borderWidth: 2.5, pointRadius: 4, tension: 0.2 },
+          { label: 'Projeção', data: [null,null,null,null,10906236,11208480,12204862], borderColor: colors.violet, borderDash: [6,4], borderWidth: 2.5, pointRadius: 4, tension: 0.2 }
+        ]
+      },
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { boxWidth: 12 } } } }
+    });
+
+    // Projeção Lucro Líquido
+    new Chart(document.getElementById('chartProjLL'), {
+      type: 'line',
+      data: {
+        labels: anosProj,
+        datasets: [
+          { label: 'Histórico', data: [876805,-123463,-18439,-482097,-1042704,null,null], borderColor: colors.blue, borderWidth: 2.5, pointRadius: 4, tension: 0.2 },
+          { label: 'Base', data: [null,null,null,null,-1042704,-1417275,-1837040], borderColor: colors.red, borderDash: [6,4], borderWidth: 2.5, pointRadius: 4, tension: 0.2 },
+          { label: 'Pessimista', data: [null,null,null,null,-1042704,-1700730,-2204448], borderColor: '#7f1d1d', borderDash: [2,4], borderWidth: 1.8, pointRadius: 3, tension: 0.2 },
+          { label: 'Otimista', data: [null,null,null,null,-1042704,-1133820,-1469632], borderColor: colors.amber, borderDash: [2,4], borderWidth: 1.8, pointRadius: 3, tension: 0.2 }
+        ]
+      },
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { boxWidth: 12 } } } }
+    });
+
+    // Cobertura juros
+    new Chart(document.getElementById('chartCobertura'), {
+      type: 'bar',
+      data: {
+        labels: anos,
+        datasets: [{
+          label: 'Cobertura de Juros (x)',
+          data: [4.74, 0.61, 0.15, 0.34, 0.12],
+          backgroundColor: ctx => ctx.raw >= 1 ? colors.green : colors.red,
+          borderRadius: 4
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false },
+          tooltip: { callbacks: { label: c => c.raw.toFixed(2) + 'x' } }
+        },
+        scales: { y: { ticks: { callback: v => v + 'x' } } }
+      }
+    });
+
+    // Dívida Líquida vs EBITDA
+    new Chart(document.getElementById('chartDividaEbitda'), {
+      type: 'bar',
+      data: {
+        labels: anos,
+        datasets: [
+          { label: 'Dívida Líquida (R$ mi)', data: [2923,4911,5590,7063,7011], backgroundColor: colors.red, borderRadius: 4, yAxisID: 'y' },
+          { label: 'EBITDA (R$ mi)', data: [1406,822,463,977,1156], backgroundColor: colors.green, borderRadius: 4, yAxisID: 'y' },
+          { label: 'DL / EBITDA (x)', data: [2.08,5.97,12.07,7.23,6.07], type: 'line', borderColor: colors.amber, borderWidth: 2.5, pointRadius: 4, tension: 0.3, yAxisID: 'y1' }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { position: 'bottom', labels: { boxWidth: 12 } } },
+        scales: {
+          y: { position: 'left', beginAtZero: true },
+          y1: { position: 'right', beginAtZero: true, grid: { drawOnChartArea: false }, ticks: { callback: v => v + 'x' } }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
